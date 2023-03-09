@@ -17,6 +17,17 @@
     <body>
         <h1>Editar Produto</h1>
 
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        
+
         <form method="POST" action="/produto/{{$produto->id}}">
             <input type="hidden" name="_method" value="put" />
             @csrf
@@ -32,7 +43,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
-        
-        
+
+
     </body>
 </html>
