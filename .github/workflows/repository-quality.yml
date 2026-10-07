@@ -41,5 +41,8 @@ jobs:
           node tests/repository-quality.node.mjs
           echo "quality-ok" > quality/dist/quality.ok
 
+      - name: PHPStan static analysis
+        continue-on-error: true
+        run: docker run --rm -v "$PWD:/app" -w /app ghcr.io/phpstan/phpstan:2.1 analyse --no-progress --configuration=phpstan.neon
       - name: Docker build
         run: docker build -f quality/Dockerfile -t repository-quality .
